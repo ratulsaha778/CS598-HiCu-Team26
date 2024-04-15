@@ -32,3 +32,6 @@ data
 |	|	disch_full.csv, disch_dev_split.csv, disch_train_split.csv, disch_test_split.csv
 |	|	ALL_CODES.csv, ALL_CODES_filtered.csv
 ```
+
+6. Final data files are loaded in Google Drive: https://drive.google.com/drive/folders/1wb8_7s_7mVQpuYbco3Em38hf8mxTk7kX?usp=drive_link. These files used to train the model and performance check in Google Colab.
+
