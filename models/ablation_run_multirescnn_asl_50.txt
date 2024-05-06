@@ -1,0 +1,353 @@
+Starting run No. 1 of 3
+Namespace(MODEL_DIR='./models', DATA_DIR='./data', MIMIC_3_DIR='./data/mimic3', MIMIC_2_DIR='./data/mimic2', data_path='./data/mimic3/train_50.csv', vocab='./data/mimic3/vocab.csv', Y='50', version='mimic3', MAX_LENGTH=4096, model='MultiResCNN', decoder='RandomlyInitialized', filter_size='3,5,9,15,19,25', num_filter_maps=50, conv_layer=1, embed_file='./data/mimic3/processed_full_100.embed', hyperbolic_dim=50, test_model=None, use_ext_emb=False, cat_hyperbolic=False, loss='BCE', asl_config='0,0,0', asl_reduction='sum', n_epochs='2,2,3,5,50', depth=5, dropout=0.2, patience=10, batch_size=8, lr=5e-05, weight_decay=0, criterion='prec_at_8', gpu='0', num_workers=1, tune_wordemb=True, random_seed=0, thres=0.5, longformer_dir='', reader_conv_num=2, reader_trans_num=4, trans_ff_dim=1024, num_code_title_tokens=36, code_title_filter_size=9, lstm_hidden_dim=512, attn_dim=512, scheduler=0.9, scheduler_patience=5, command='python main.py --model MultiResCNN --vocab ./data/mimic3/vocab.csv --decoder RandomlyInitialized --Y 50 --data_path ./data/mimic3/train_50.csv --MAX_LENGTH 4096 --embed_file ./data/mimic3/processed_full_100.embed --tune_wordemb --batch_size 8 --lr 5e-5 --n_epochs 2,2,3,5,50 --criterion prec_at_8 --random_seed 0 --num_workers 1', gpu_list=[0])
+loading lookups...
+Depth 0: 14
+Depth 1: 30
+Depth 2: 39
+Depth 3: 47
+Depth 4: 50
+loading pretrained embeddings from ./data/mimic3/processed_full_100.embed
+adding unk embedding
+MultiResCNN(
+  (word_rep): WordRep(
+    (embed): Embedding(51921, 100, padding_idx=0)
+    (embed_drop): Dropout(p=0.2, inplace=False)
+  )
+  (conv): ModuleList(
+    (0): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(3,), stride=(1,), padding=(1,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (1): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(5,), stride=(1,), padding=(2,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (2): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(9,), stride=(1,), padding=(4,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(9,), stride=(1,), padding=(4,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(9,), stride=(1,), padding=(4,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (3): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(15,), stride=(1,), padding=(7,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(15,), stride=(1,), padding=(7,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(15,), stride=(1,), padding=(7,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (4): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(19,), stride=(1,), padding=(9,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(19,), stride=(1,), padding=(9,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(19,), stride=(1,), padding=(9,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (5): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(25,), stride=(1,), padding=(12,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(25,), stride=(1,), padding=(12,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(25,), stride=(1,), padding=(12,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+  )
+  (decoder): RandomlyInitializedDecoder(
+    (U): Linear(in_features=300, out_features=50, bias=True)
+    (final): Linear(in_features=300, out_features=50, bias=True)
+    (loss_function): BCEWithLogitsLoss()
+  )
+)
+train_instances 8066
+dev_instances 1573
+test_instances 1729
+Total epochs at each level: [2, 2, 3, 5, 50]
+Training model at depth 4:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 126.10s, loss: 0.3333
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.0738, 0.1935, 0.1002, 0.1320, 0.7068
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.1527, 0.5366, 0.1759, 0.2650, 0.7500
+rec_at_5: 0.3247
+prec_at_5: 0.3654
+rec_at_8: 0.4284
+prec_at_8: 0.3103
+rec_at_15: 0.5842
+prec_at_15: 0.2292
+
+evaluation finish in 96.43s
+saved metrics, params, model to directory ./models/MultiResCNN_RandomlyInitialized_A_BCE_50_May_03_01_42_49
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 145.04s, loss: 0.2761
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.1546, 0.3512, 0.1911, 0.2475, 0.7774
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.2334, 0.6612, 0.2651, 0.3785, 0.8260
+rec_at_5: 0.4212
+prec_at_5: 0.4577
+rec_at_8: 0.5436
+prec_at_8: 0.3761
+rec_at_15: 0.7119
+prec_at_15: 0.2697
+
+evaluation finish in 107.14s
+saved metrics, params, model to directory ./models/MultiResCNN_RandomlyInitialized_A_BCE_50_May_03_01_42_49
+
+EPOCH 2
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 151.90s, loss: 0.2485
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.2290, 0.4686, 0.2766, 0.3479, 0.8176
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.3031, 0.6948, 0.3497, 0.4652, 0.8646
+rec_at_5: 0.4790
+prec_at_5: 0.5130
+rec_at_8: 0.6072
+prec_at_8: 0.4193
+rec_at_15: 0.7815
+prec_at_15: 0.2934
+
+evaluation finish in 111.33s
+saved metrics, params, model to directory ./models/MultiResCNN_RandomlyInitialized_A_BCE_50_May_03_01_42_49
+
+EPOCH 3
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 154.33s, loss: 0.2305
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.2863, 0.4810, 0.3585, 0.4108, 0.8382
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.3496, 0.6742, 0.4207, 0.5181, 0.8814
+rec_at_5: 0.5143
+prec_at_5: 0.5414
+rec_at_8: 0.6467
+prec_at_8: 0.4407
+rec_at_15: 0.8174
+prec_at_15: 0.3069
+
+evaluation finish in 111.74s
+saved metrics, params, model to directory ./models/MultiResCNN_RandomlyInitialized_A_BCE_50_May_03_01_42_49
+
+EPOCH 4
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 161.80s, loss: 0.2183
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3083, 0.4886, 0.3902, 0.4339, 0.8530
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.3672, 0.6741, 0.4465, 0.5372, 0.8926
+rec_at_5: 0.5358
+prec_at_5: 0.5556
+rec_at_8: 0.6733
+prec_at_8: 0.4563
+rec_at_15: 0.8419
+prec_at_15: 0.3145
+
+evaluation finish in 112.23s
+saved metrics, params, model to directory ./models/MultiResCNN_RandomlyInitialized_A_BCE_50_May_03_01_42_49
+
+EPOCH 5
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 162.03s, loss: 0.2081
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3451, 0.5566, 0.4284, 0.4842, 0.8617
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4013, 0.6949, 0.4871, 0.5728, 0.9031
+rec_at_5: 0.5518
+prec_at_5: 0.5748
+rec_at_8: 0.6954
+prec_at_8: 0.4704
+rec_at_15: 0.8591
+prec_at_15: 0.3222
+
+evaluation finish in 114.73s
+saved metrics, params, model to directory ./models/MultiResCNN_RandomlyInitialized_A_BCE_50_May_03_01_42_49
+
+EPOCH 6
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 161.45s, loss: 0.1995
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3715, 0.5709, 0.4768, 0.5196, 0.8688
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4270, 0.6864, 0.5305, 0.5985, 0.9067
+rec_at_5: 0.5662
+prec_at_5: 0.5850
+rec_at_8: 0.7088
+prec_at_8: 0.4778
+rec_at_15: 0.8632
+prec_at_15: 0.3237
+
+evaluation finish in 115.12s
+saved metrics, params, model to directory ./models/MultiResCNN_RandomlyInitialized_A_BCE_50_May_03_01_42_49
+
+EPOCH 7
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.04s, loss: 0.1929
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3738, 0.5781, 0.4745, 0.5212, 0.8748
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4345, 0.6974, 0.5354, 0.6058, 0.9118
+rec_at_5: 0.5736
+prec_at_5: 0.5930
+rec_at_8: 0.7203
+prec_at_8: 0.4848
+rec_at_15: 0.8747
+prec_at_15: 0.3282
+
+evaluation finish in 113.29s
+saved metrics, params, model to directory ./models/MultiResCNN_RandomlyInitialized_A_BCE_50_May_03_01_42_49
+
+EPOCH 8
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.72s, loss: 0.1864
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3839, 0.5885, 0.4813, 0.5295, 0.8799
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4417, 0.7150, 0.5360, 0.6127, 0.9145
+rec_at_5: 0.5796
+prec_at_5: 0.5995
+rec_at_8: 0.7189
+prec_at_8: 0.4865
+rec_at_15: 0.8769
+prec_at_15: 0.3292
+
+evaluation finish in 113.24s
+saved metrics, params, model to directory ./models/MultiResCNN_RandomlyInitialized_A_BCE_50_May_03_01_42_49
+
+EPOCH 9
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.44s, loss: 0.1800
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3961, 0.6283, 0.4939, 0.5531, 0.8844
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4516, 0.7205, 0.5476, 0.6222, 0.9187
+rec_at_5: 0.5981
+prec_at_5: 0.6086
+rec_at_8: 0.7351
+prec_at_8: 0.4955
+rec_at_15: 0.8825
+prec_at_15: 0.3314
+
+evaluation finish in 113.34s
+saved metrics, params, model to directory ./models/MultiResCNN_RandomlyInitialized_A_BCE_50_May_03_01_42_49
+
+EPOCH 10
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.56s, loss: 0.1749
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4064, 0.6299, 0.5031, 0.5594, 0.8877
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4569, 0.7268, 0.5517, 0.6272, 0.9200
+rec_at_5: 0.5959
+prec_at_5: 0.6127
+rec_at_8: 0.7405
+prec_at_8: 0.4979
+rec_at_15: 0.8845
+prec_at_15: 0.3325
+
+evaluation finish in 113.54s
+saved metrics, params, model to directory ./models/MultiResCNN_RandomlyInitialized_A_BCE_50_May_03_01_42_49
+
+EPOCH 11
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()

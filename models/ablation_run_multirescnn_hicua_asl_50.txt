@@ -1,0 +1,2102 @@
+Starting run No. 1 of 1
+Namespace(MODEL_DIR='./models', DATA_DIR='./data', MIMIC_3_DIR='./data/mimic3', MIMIC_2_DIR='./data/mimic2', data_path='./data/mimic3/train_50.csv', vocab='./data/mimic3/vocab.csv', Y='50', version='mimic3', MAX_LENGTH=4096, model='MultiResCNN', decoder='HierarchicalHyperbolic', filter_size='3,5,9,15,19,25', num_filter_maps=50, conv_layer=1, embed_file='./data/mimic3/processed_full_100.embed', hyperbolic_dim=50, test_model=None, use_ext_emb=False, cat_hyperbolic=False, loss='ASL', asl_config='1,0,0.03', asl_reduction='sum', n_epochs='2,2,3,5,50', depth=5, dropout=0.2, patience=10, batch_size=8, lr=5e-05, weight_decay=0, criterion='prec_at_8', gpu='0', num_workers=8, tune_wordemb=True, random_seed=0, thres=0.5, longformer_dir='', reader_conv_num=2, reader_trans_num=4, trans_ff_dim=1024, num_code_title_tokens=36, code_title_filter_size=9, lstm_hidden_dim=512, attn_dim=512, scheduler=0.9, scheduler_patience=5, command='python main.py --model MultiResCNN --vocab ./data/mimic3/vocab.csv --decoder HierarchicalHyperbolic --loss ASL --asl_config 1,0,0.03 --Y 50 --data_path ./data/mimic3/train_50.csv --MAX_LENGTH 4096 --embed_file ./data/mimic3/processed_full_100.embed --tune_wordemb --batch_size 8 --lr 5e-5 --depth 5 --n_epochs 2,2,3,5,50 --criterion prec_at_8 --random_seed 0 --num_workers 8', gpu_list=[0])
+loading lookups...
+Depth 0: 14
+Depth 1: 30
+Depth 2: 39
+Depth 3: 47
+Depth 4: 50
+Training hyperbolic embeddings...
+loading pretrained embeddings from ./data/mimic3/processed_full_100.embed
+adding unk embedding
+MultiResCNN(
+  (word_rep): WordRep(
+    (embed): Embedding(51921, 100, padding_idx=0)
+    (embed_drop): Dropout(p=0.2, inplace=False)
+  )
+  (conv): ModuleList(
+    (0): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(3,), stride=(1,), padding=(1,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (1): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(5,), stride=(1,), padding=(2,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (2): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(9,), stride=(1,), padding=(4,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(9,), stride=(1,), padding=(4,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(9,), stride=(1,), padding=(4,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (3): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(15,), stride=(1,), padding=(7,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(15,), stride=(1,), padding=(7,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(15,), stride=(1,), padding=(7,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (4): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(19,), stride=(1,), padding=(9,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(19,), stride=(1,), padding=(9,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(19,), stride=(1,), padding=(9,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (5): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(25,), stride=(1,), padding=(12,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(25,), stride=(1,), padding=(12,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(25,), stride=(1,), padding=(12,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+  )
+  (decoder): Decoder(
+    (decoder_dict): ModuleDict(
+      (0_0): Linear(in_features=300, out_features=14, bias=True)
+      (0_1): Linear(in_features=300, out_features=14, bias=True)
+      (1_0): Linear(in_features=300, out_features=30, bias=True)
+      (1_1): Linear(in_features=300, out_features=30, bias=True)
+      (2_0): Linear(in_features=300, out_features=39, bias=True)
+      (2_1): Linear(in_features=300, out_features=39, bias=True)
+      (3_0): Linear(in_features=300, out_features=47, bias=True)
+      (3_1): Linear(in_features=300, out_features=47, bias=True)
+      (4_0): Linear(in_features=300, out_features=50, bias=True)
+      (4_1): Linear(in_features=300, out_features=50, bias=True)
+    )
+    (hyperbolic_fc_dict): ModuleDict(
+      (0): Linear(in_features=50, out_features=300, bias=True)
+      (1): Linear(in_features=50, out_features=300, bias=True)
+      (2): Linear(in_features=50, out_features=300, bias=True)
+      (3): Linear(in_features=50, out_features=300, bias=True)
+      (4): Linear(in_features=50, out_features=300, bias=True)
+    )
+    (loss_function): AsymmetricLoss()
+  )
+)
+train_instances 8066
+dev_instances 1573
+test_instances 1729
+Total epochs at each level: [2, 2, 3, 5, 50]
+Training model at depth 0:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 126.51s, loss: 32.5276
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3222, 0.4424, 0.4805, 0.4607, 0.7701
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4966, 0.6229, 0.7100, 0.6636, 0.8519
+rec_at_5: 0.7267
+prec_at_5: 0.5686
+rec_at_8: 0.8893
+prec_at_8: 0.4462
+rec_at_15: 1.0000
+prec_at_15: 0.2922
+
+evaluation finish in 97.19s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 145.48s, loss: 27.8550
+last epoch: testing on dev and test sets
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4075, 0.5311, 0.6182, 0.5714, 0.8215
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5332, 0.6388, 0.7633, 0.6955, 0.8800
+rec_at_5: 0.7735
+prec_at_5: 0.5995
+rec_at_8: 0.9170
+prec_at_8: 0.4584
+rec_at_15: 1.0000
+prec_at_15: 0.2922
+
+evaluation finish in 106.27s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4235, 0.5894, 0.6329, 0.6103, 0.8278
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5423, 0.6447, 0.7734, 0.7033, 0.8842
+rec_at_5: 0.7730
+prec_at_5: 0.6071
+rec_at_8: 0.9190
+prec_at_8: 0.4672
+rec_at_15: 1.0000
+prec_at_15: 0.2974
+
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Training model at depth 1:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.87s, loss: 51.8514
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3054, 0.4938, 0.4508, 0.4713, 0.8261
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4047, 0.5775, 0.5748, 0.5762, 0.8695
+rec_at_5: 0.5758
+prec_at_5: 0.5457
+rec_at_8: 0.7287
+prec_at_8: 0.4455
+rec_at_15: 0.9113
+prec_at_15: 0.3096
+
+evaluation finish in 114.05s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.25s, loss: 45.6201
+last epoch: testing on dev and test sets
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3801, 0.5229, 0.5829, 0.5513, 0.8541
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4574, 0.5915, 0.6686, 0.6277, 0.8929
+rec_at_5: 0.6219
+prec_at_5: 0.5882
+rec_at_8: 0.7776
+prec_at_8: 0.4768
+rec_at_15: 0.9304
+prec_at_15: 0.3163
+
+evaluation finish in 111.98s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3931, 0.5191, 0.5962, 0.5550, 0.8556
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4711, 0.6052, 0.6801, 0.6404, 0.8942
+rec_at_5: 0.6284
+prec_at_5: 0.5986
+rec_at_8: 0.7744
+prec_at_8: 0.4835
+rec_at_15: 0.9286
+prec_at_15: 0.3232
+
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Training model at depth 2:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.31s, loss: 54.9282
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3362, 0.4398, 0.5118, 0.4731, 0.8411
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4182, 0.5711, 0.6098, 0.5898, 0.8822
+rec_at_5: 0.5731
+prec_at_5: 0.5635
+rec_at_8: 0.7095
+prec_at_8: 0.4543
+rec_at_15: 0.8611
+prec_at_15: 0.3077
+
+evaluation finish in 115.17s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.22s, loss: 49.8022
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3766, 0.5035, 0.5795, 0.5388, 0.8612
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4498, 0.5718, 0.6783, 0.6205, 0.8980
+rec_at_5: 0.6070
+prec_at_5: 0.5983
+rec_at_8: 0.7385
+prec_at_8: 0.4773
+rec_at_15: 0.8807
+prec_at_15: 0.3163
+
+evaluation finish in 111.96s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 2
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 154.85s, loss: 46.6264
+last epoch: testing on dev and test sets
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3998, 0.5560, 0.5467, 0.5513, 0.8748
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4783, 0.6489, 0.6454, 0.6471, 0.9106
+rec_at_5: 0.6282
+prec_at_5: 0.6141
+rec_at_8: 0.7655
+prec_at_8: 0.4932
+rec_at_15: 0.9035
+prec_at_15: 0.3245
+
+evaluation finish in 112.95s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4053, 0.5774, 0.5538, 0.5654, 0.8741
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4796, 0.6502, 0.6463, 0.6482, 0.9093
+rec_at_5: 0.6171
+prec_at_5: 0.6176
+rec_at_8: 0.7527
+prec_at_8: 0.4957
+rec_at_15: 0.9010
+prec_at_15: 0.3325
+
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Training model at depth 3:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+------------------------------------------
+
+Starting run No. 1 of 1
+Namespace(MODEL_DIR='./models', DATA_DIR='./data', MIMIC_3_DIR='./data/mimic3', MIMIC_2_DIR='./data/mimic2', data_path='./data/mimic3/train_50.csv', vocab='./data/mimic3/vocab.csv', Y='50', version='mimic3', MAX_LENGTH=4096, model='MultiResCNN', decoder='HierarchicalHyperbolic', filter_size='3,5,9,15,19,25', num_filter_maps=50, conv_layer=1, embed_file='./data/mimic3/processed_full_100.embed', hyperbolic_dim=50, test_model=None, use_ext_emb=False, cat_hyperbolic=False, loss='ASL', asl_config='1,0,0.03', asl_reduction='sum', n_epochs='2,2,3,5,50', depth=5, dropout=0.2, patience=10, batch_size=8, lr=5e-05, weight_decay=0, criterion='prec_at_8', gpu='0', num_workers=8, tune_wordemb=True, random_seed=0, thres=0.5, longformer_dir='', reader_conv_num=2, reader_trans_num=4, trans_ff_dim=1024, num_code_title_tokens=36, code_title_filter_size=9, lstm_hidden_dim=512, attn_dim=512, scheduler=0.9, scheduler_patience=5, command='python main.py --model MultiResCNN --vocab ./data/mimic3/vocab.csv --decoder HierarchicalHyperbolic --loss ASL --asl_config 1,0,0.03 --Y 50 --data_path ./data/mimic3/train_50.csv --MAX_LENGTH 4096 --embed_file ./data/mimic3/processed_full_100.embed --tune_wordemb --batch_size 8 --lr 5e-5 --depth 5 --n_epochs 2,2,3,5,50 --criterion prec_at_8 --random_seed 0 --num_workers 8', gpu_list=[0])
+loading lookups...
+Depth 0: 14
+Depth 1: 30
+Depth 2: 39
+Depth 3: 47
+Depth 4: 50
+Training hyperbolic embeddings...
+loading pretrained embeddings from ./data/mimic3/processed_full_100.embed
+adding unk embedding
+MultiResCNN(
+  (word_rep): WordRep(
+    (embed): Embedding(51921, 100, padding_idx=0)
+    (embed_drop): Dropout(p=0.2, inplace=False)
+  )
+  (conv): ModuleList(
+    (0): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(3,), stride=(1,), padding=(1,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (1): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(5,), stride=(1,), padding=(2,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (2): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(9,), stride=(1,), padding=(4,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(9,), stride=(1,), padding=(4,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(9,), stride=(1,), padding=(4,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (3): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(15,), stride=(1,), padding=(7,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(15,), stride=(1,), padding=(7,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(15,), stride=(1,), padding=(7,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (4): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(19,), stride=(1,), padding=(9,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(19,), stride=(1,), padding=(9,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(19,), stride=(1,), padding=(9,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (5): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(25,), stride=(1,), padding=(12,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(25,), stride=(1,), padding=(12,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(25,), stride=(1,), padding=(12,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+  )
+  (decoder): Decoder(
+    (decoder_dict): ModuleDict(
+      (0_0): Linear(in_features=300, out_features=14, bias=True)
+      (0_1): Linear(in_features=300, out_features=14, bias=True)
+      (1_0): Linear(in_features=300, out_features=30, bias=True)
+      (1_1): Linear(in_features=300, out_features=30, bias=True)
+      (2_0): Linear(in_features=300, out_features=39, bias=True)
+      (2_1): Linear(in_features=300, out_features=39, bias=True)
+      (3_0): Linear(in_features=300, out_features=47, bias=True)
+      (3_1): Linear(in_features=300, out_features=47, bias=True)
+      (4_0): Linear(in_features=300, out_features=50, bias=True)
+      (4_1): Linear(in_features=300, out_features=50, bias=True)
+    )
+    (hyperbolic_fc_dict): ModuleDict(
+      (0): Linear(in_features=50, out_features=300, bias=True)
+      (1): Linear(in_features=50, out_features=300, bias=True)
+      (2): Linear(in_features=50, out_features=300, bias=True)
+      (3): Linear(in_features=50, out_features=300, bias=True)
+      (4): Linear(in_features=50, out_features=300, bias=True)
+    )
+    (loss_function): AsymmetricLoss()
+  )
+)
+train_instances 8066
+dev_instances 1573
+test_instances 1729
+Total epochs at each level: [2, 2, 3, 5, 50]
+Training model at depth 0:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 126.51s, loss: 32.5276
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3222, 0.4424, 0.4805, 0.4607, 0.7701
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4966, 0.6229, 0.7100, 0.6636, 0.8519
+rec_at_5: 0.7267
+prec_at_5: 0.5686
+rec_at_8: 0.8893
+prec_at_8: 0.4462
+rec_at_15: 1.0000
+prec_at_15: 0.2922
+
+evaluation finish in 97.19s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 145.48s, loss: 27.8550
+last epoch: testing on dev and test sets
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4075, 0.5311, 0.6182, 0.5714, 0.8215
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5332, 0.6388, 0.7633, 0.6955, 0.8800
+rec_at_5: 0.7735
+prec_at_5: 0.5995
+rec_at_8: 0.9170
+prec_at_8: 0.4584
+rec_at_15: 1.0000
+prec_at_15: 0.2922
+
+evaluation finish in 106.27s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4235, 0.5894, 0.6329, 0.6103, 0.8278
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5423, 0.6447, 0.7734, 0.7033, 0.8842
+rec_at_5: 0.7730
+prec_at_5: 0.6071
+rec_at_8: 0.9190
+prec_at_8: 0.4672
+rec_at_15: 1.0000
+prec_at_15: 0.2974
+
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Training model at depth 1:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.87s, loss: 51.8514
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3054, 0.4938, 0.4508, 0.4713, 0.8261
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4047, 0.5775, 0.5748, 0.5762, 0.8695
+rec_at_5: 0.5758
+prec_at_5: 0.5457
+rec_at_8: 0.7287
+prec_at_8: 0.4455
+rec_at_15: 0.9113
+prec_at_15: 0.3096
+
+evaluation finish in 114.05s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.25s, loss: 45.6201
+last epoch: testing on dev and test sets
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3801, 0.5229, 0.5829, 0.5513, 0.8541
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4574, 0.5915, 0.6686, 0.6277, 0.8929
+rec_at_5: 0.6219
+prec_at_5: 0.5882
+rec_at_8: 0.7776
+prec_at_8: 0.4768
+rec_at_15: 0.9304
+prec_at_15: 0.3163
+
+evaluation finish in 111.98s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3931, 0.5191, 0.5962, 0.5550, 0.8556
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4711, 0.6052, 0.6801, 0.6404, 0.8942
+rec_at_5: 0.6284
+prec_at_5: 0.5986
+rec_at_8: 0.7744
+prec_at_8: 0.4835
+rec_at_15: 0.9286
+prec_at_15: 0.3232
+
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Training model at depth 2:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.31s, loss: 54.9282
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3362, 0.4398, 0.5118, 0.4731, 0.8411
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4182, 0.5711, 0.6098, 0.5898, 0.8822
+rec_at_5: 0.5731
+prec_at_5: 0.5635
+rec_at_8: 0.7095
+prec_at_8: 0.4543
+rec_at_15: 0.8611
+prec_at_15: 0.3077
+
+evaluation finish in 115.17s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.22s, loss: 49.8022
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3766, 0.5035, 0.5795, 0.5388, 0.8612
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4498, 0.5718, 0.6783, 0.6205, 0.8980
+rec_at_5: 0.6070
+prec_at_5: 0.5983
+rec_at_8: 0.7385
+prec_at_8: 0.4773
+rec_at_15: 0.8807
+prec_at_15: 0.3163
+
+evaluation finish in 111.96s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 2
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 154.85s, loss: 46.6264
+last epoch: testing on dev and test sets
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3998, 0.5560, 0.5467, 0.5513, 0.8748
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4783, 0.6489, 0.6454, 0.6471, 0.9106
+rec_at_5: 0.6282
+prec_at_5: 0.6141
+rec_at_8: 0.7655
+prec_at_8: 0.4932
+rec_at_15: 0.9035
+prec_at_15: 0.3245
+
+evaluation finish in 112.95s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4053, 0.5774, 0.5538, 0.5654, 0.8741
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4796, 0.6502, 0.6463, 0.6482, 0.9093
+rec_at_5: 0.6171
+prec_at_5: 0.6176
+rec_at_8: 0.7527
+prec_at_8: 0.4957
+rec_at_15: 0.9010
+prec_at_15: 0.3325
+
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Training model at depth 3:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.20s, loss: 56.0740
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3735, 0.4979, 0.5566, 0.5256, 0.8686
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4375, 0.5752, 0.6464, 0.6087, 0.9047
+rec_at_5: 0.5842
+prec_at_5: 0.5947
+rec_at_8: 0.7147
+prec_at_8: 0.4803
+rec_at_15: 0.8661
+prec_at_15: 0.3236
+
+evaluation finish in 116.29s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.03s, loss: 51.6420
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4062, 0.5522, 0.5798, 0.5657, 0.8801
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4668, 0.6082, 0.6676, 0.6365, 0.9143
+rec_at_5: 0.6024
+prec_at_5: 0.6145
+rec_at_8: 0.7360
+prec_at_8: 0.4944
+rec_at_15: 0.8803
+prec_at_15: 0.3297
+
+evaluation finish in 113.13s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 2
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.70s, loss: 49.3361
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4251, 0.5457, 0.6125, 0.5772, 0.8883
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4756, 0.6071, 0.6870, 0.6446, 0.9200
+rec_at_5: 0.6106
+prec_at_5: 0.6205
+rec_at_8: 0.7511
+prec_at_8: 0.5045
+rec_at_15: 0.8883
+prec_at_15: 0.3337
+
+evaluation finish in 113.76s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 3
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 157.24s, loss: 47.2426
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4422, 0.5796, 0.6252, 0.6016, 0.8940
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4891, 0.6213, 0.6968, 0.6569, 0.9239
+rec_at_5: 0.6205
+prec_at_5: 0.6300
+rec_at_8: 0.7572
+prec_at_8: 0.5095
+rec_at_15: 0.8951
+prec_at_15: 0.3364
+
+evaluation finish in 113.48s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 4
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.35s, loss: 45.5158
+last epoch: testing on dev and test sets
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4557, 0.5824, 0.6510, 0.6148, 0.8993
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4973, 0.6193, 0.7162, 0.6642, 0.9278
+rec_at_5: 0.6263
+prec_at_5: 0.6334
+rec_at_8: 0.7624
+prec_at_8: 0.5133
+rec_at_15: 0.9022
+prec_at_15: 0.3398
+
+evaluation finish in 112.79s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4539, 0.5798, 0.6480, 0.6120, 0.8979
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4928, 0.6188, 0.7077, 0.6602, 0.9265
+rec_at_5: 0.6199
+prec_at_5: 0.6370
+rec_at_8: 0.7622
+prec_at_8: 0.5206
+rec_at_15: 0.9002
+prec_at_15: 0.3474
+
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Training model at depth 4:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.88s, loss: 52.5459
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4340, 0.5454, 0.6340, 0.5863, 0.8967
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4759, 0.6058, 0.6895, 0.6449, 0.9233
+rec_at_5: 0.6105
+prec_at_5: 0.6175
+rec_at_8: 0.7459
+prec_at_8: 0.5009
+rec_at_15: 0.8840
+prec_at_15: 0.3341
+
+evaluation finish in 116.41s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.56s, loss: 49.0171
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4483, 0.5534, 0.6536, 0.5994, 0.9015
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4892, 0.6099, 0.7118, 0.6570, 0.9276
+rec_at_5: 0.6207
+prec_at_5: 0.6257
+rec_at_8: 0.7536
+prec_at_8: 0.5056
+rec_at_15: 0.8899
+prec_at_15: 0.3367
+
+evaluation finish in 113.88s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 2
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.28s, loss: 47.2774
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4600, 0.5712, 0.6706, 0.6170, 0.9072
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4967, 0.6146, 0.7213, 0.6637, 0.9313
+rec_at_5: 0.6296
+prec_at_5: 0.6351
+rec_at_8: 0.7628
+prec_at_8: 0.5133
+rec_at_15: 0.8975
+prec_at_15: 0.3402
+
+evaluation finish in 113.21s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 3
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.83s, loss: 45.5474
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4679, 0.5662, 0.7031, 0.6273, 0.9094
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5017, 0.6053, 0.7457, 0.6682, 0.9319
+rec_at_5: 0.6301
+prec_at_5: 0.6351
+rec_at_8: 0.7618
+prec_at_8: 0.5139
+rec_at_15: 0.8961
+prec_at_15: 0.3400
+
+evaluation finish in 113.66s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 4
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 157.04s, loss: 44.1265
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4760, 0.5799, 0.6932, 0.6315, 0.9119
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5088, 0.6169, 0.7437, 0.6744, 0.9347
+rec_at_5: 0.6373
+prec_at_5: 0.6412
+rec_at_8: 0.7734
+prec_at_8: 0.5195
+rec_at_15: 0.9025
+prec_at_15: 0.3423
+
+evaluation finish in 113.42s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 5
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.47s, loss: 42.7786
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4816, 0.5848, 0.7009, 0.6376, 0.9122
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5115, 0.6195, 0.7458, 0.6768, 0.9347
+rec_at_5: 0.6367
+prec_at_5: 0.6407
+rec_at_8: 0.7735
+prec_at_8: 0.5197
+rec_at_15: 0.9017
+prec_at_15: 0.3421
+
+evaluation finish in 113.50s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 6
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.82s, loss: 41.5859
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4866, 0.5892, 0.7004, 0.6400, 0.9131
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5167, 0.6264, 0.7467, 0.6813, 0.9361
+rec_at_5: 0.6405
+prec_at_5: 0.6459
+rec_at_8: 0.7752
+prec_at_8: 0.5233
+rec_at_15: 0.9049
+prec_at_15: 0.3433
+
+evaluation finish in 113.37s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 7
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.81s, loss: 40.4983
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4910, 0.6103, 0.6825, 0.6444, 0.9130
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5228, 0.6453, 0.7335, 0.6866, 0.9350
+rec_at_5: 0.6408
+prec_at_5: 0.6432
+rec_at_8: 0.7763
+prec_at_8: 0.5221
+rec_at_15: 0.9048
+prec_at_15: 0.3433
+
+evaluation finish in 113.05s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 8
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.75s, loss: 39.4905
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4948, 0.6008, 0.7027, 0.6478, 0.9142
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5240, 0.6366, 0.7477, 0.6877, 0.9362
+rec_at_5: 0.6419
+prec_at_5: 0.6451
+rec_at_8: 0.7760
+prec_at_8: 0.5221
+rec_at_15: 0.9039
+prec_at_15: 0.3434
+
+evaluation finish in 113.44s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 9
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.48s, loss: 38.3820
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4934, 0.6105, 0.6911, 0.6483, 0.9140
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5270, 0.6490, 0.7370, 0.6902, 0.9354
+rec_at_5: 0.6409
+prec_at_5: 0.6454
+rec_at_8: 0.7771
+prec_at_8: 0.5235
+rec_at_15: 0.9069
+prec_at_15: 0.3441
+
+evaluation finish in 114.47s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 10
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.02s, loss: 37.5085
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4876, 0.5879, 0.7088, 0.6427, 0.9143
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5165, 0.6216, 0.7533, 0.6811, 0.9356
+rec_at_5: 0.6396
+prec_at_5: 0.6428
+rec_at_8: 0.7712
+prec_at_8: 0.5201
+rec_at_15: 0.9008
+prec_at_15: 0.3427
+
+evaluation finish in 113.10s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 11
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.37s, loss: 36.5886
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4937, 0.6179, 0.6795, 0.6473, 0.9140
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5265, 0.6530, 0.7311, 0.6898, 0.9353
+rec_at_5: 0.6410
+prec_at_5: 0.6448
+rec_at_8: 0.7743
+prec_at_8: 0.5218
+rec_at_15: 0.9031
+prec_at_15: 0.3433
+
+evaluation finish in 113.99s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 12
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.41s, loss: 35.6481
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4960, 0.6146, 0.6930, 0.6514, 0.9143
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5295, 0.6515, 0.7387, 0.6923, 0.9356
+rec_at_5: 0.6411
+prec_at_5: 0.6441
+rec_at_8: 0.7774
+prec_at_8: 0.5243
+rec_at_15: 0.9032
+prec_at_15: 0.3427
+
+evaluation finish in 113.87s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 13
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 157.00s, loss: 34.7642
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4981, 0.6122, 0.7010, 0.6536, 0.9139
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5288, 0.6456, 0.7450, 0.6918, 0.9350
+rec_at_5: 0.6398
+prec_at_5: 0.6448
+rec_at_8: 0.7765
+prec_at_8: 0.5235
+rec_at_15: 0.9012
+prec_at_15: 0.3424
+
+evaluation finish in 114.55s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 14
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.21s, loss: 33.9514
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4932, 0.6035, 0.6980, 0.6473, 0.9144
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5249, 0.6409, 0.7436, 0.6885, 0.9360
+rec_at_5: 0.6403
+prec_at_5: 0.6448
+rec_at_8: 0.7769
+prec_at_8: 0.5231
+rec_at_15: 0.9035
+prec_at_15: 0.3437
+
+evaluation finish in 114.73s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 15
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.13s, loss: 33.0623
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4952, 0.5971, 0.7143, 0.6505, 0.9142
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5205, 0.6263, 0.7550, 0.6847, 0.9353
+rec_at_5: 0.6367
+prec_at_5: 0.6432
+rec_at_8: 0.7752
+prec_at_8: 0.5224
+rec_at_15: 0.9033
+prec_at_15: 0.3434
+
+evaluation finish in 115.07s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 16
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 157.23s, loss: 32.2155
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4920, 0.5991, 0.7052, 0.6479, 0.9131
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5216, 0.6336, 0.7468, 0.6856, 0.9338
+rec_at_5: 0.6367
+prec_at_5: 0.6408
+rec_at_8: 0.7729
+prec_at_8: 0.5207
+rec_at_15: 0.8979
+prec_at_15: 0.3418
+
+evaluation finish in 119.47s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 17
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 167.43s, loss: 31.4763
+file for evaluation: ./data/mimic3/dev_50.csv
+
+---------------------------
+
+Starting run No. 1 of 1
+Namespace(MODEL_DIR='./models', DATA_DIR='./data', MIMIC_3_DIR='./data/mimic3', MIMIC_2_DIR='./data/mimic2', data_path='./data/mimic3/train_50.csv', vocab='./data/mimic3/vocab.csv', Y='50', version='mimic3', MAX_LENGTH=4096, model='MultiResCNN', decoder='HierarchicalHyperbolic', filter_size='3,5,9,15,19,25', num_filter_maps=50, conv_layer=1, embed_file='./data/mimic3/processed_full_100.embed', hyperbolic_dim=50, test_model=None, use_ext_emb=False, cat_hyperbolic=False, loss='ASL', asl_config='1,0,0.03', asl_reduction='sum', n_epochs='2,2,3,5,50', depth=5, dropout=0.2, patience=10, batch_size=8, lr=5e-05, weight_decay=0, criterion='prec_at_8', gpu='0', num_workers=8, tune_wordemb=True, random_seed=0, thres=0.5, longformer_dir='', reader_conv_num=2, reader_trans_num=4, trans_ff_dim=1024, num_code_title_tokens=36, code_title_filter_size=9, lstm_hidden_dim=512, attn_dim=512, scheduler=0.9, scheduler_patience=5, command='python main.py --model MultiResCNN --vocab ./data/mimic3/vocab.csv --decoder HierarchicalHyperbolic --loss ASL --asl_config 1,0,0.03 --Y 50 --data_path ./data/mimic3/train_50.csv --MAX_LENGTH 4096 --embed_file ./data/mimic3/processed_full_100.embed --tune_wordemb --batch_size 8 --lr 5e-5 --depth 5 --n_epochs 2,2,3,5,50 --criterion prec_at_8 --random_seed 0 --num_workers 8', gpu_list=[0])
+loading lookups...
+Depth 0: 14
+Depth 1: 30
+Depth 2: 39
+Depth 3: 47
+Depth 4: 50
+Training hyperbolic embeddings...
+loading pretrained embeddings from ./data/mimic3/processed_full_100.embed
+adding unk embedding
+MultiResCNN(
+  (word_rep): WordRep(
+    (embed): Embedding(51921, 100, padding_idx=0)
+    (embed_drop): Dropout(p=0.2, inplace=False)
+  )
+  (conv): ModuleList(
+    (0): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(3,), stride=(1,), padding=(1,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (1): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(5,), stride=(1,), padding=(2,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (2): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(9,), stride=(1,), padding=(4,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(9,), stride=(1,), padding=(4,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(9,), stride=(1,), padding=(4,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (3): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(15,), stride=(1,), padding=(7,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(15,), stride=(1,), padding=(7,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(15,), stride=(1,), padding=(7,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (4): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(19,), stride=(1,), padding=(9,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(19,), stride=(1,), padding=(9,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(19,), stride=(1,), padding=(9,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+    (5): ModuleList(
+      (0): Conv1d(100, 100, kernel_size=(25,), stride=(1,), padding=(12,))
+      (1): ResidualBlock(
+        (left): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(25,), stride=(1,), padding=(12,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): Tanh()
+          (3): Conv1d(50, 50, kernel_size=(25,), stride=(1,), padding=(12,), bias=False)
+          (4): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (shortcut): Sequential(
+          (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,), bias=False)
+          (1): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (dropout): Dropout(p=0.2, inplace=False)
+      )
+    )
+  )
+  (decoder): Decoder(
+    (decoder_dict): ModuleDict(
+      (0_0): Linear(in_features=300, out_features=14, bias=True)
+      (0_1): Linear(in_features=300, out_features=14, bias=True)
+      (1_0): Linear(in_features=300, out_features=30, bias=True)
+      (1_1): Linear(in_features=300, out_features=30, bias=True)
+      (2_0): Linear(in_features=300, out_features=39, bias=True)
+      (2_1): Linear(in_features=300, out_features=39, bias=True)
+      (3_0): Linear(in_features=300, out_features=47, bias=True)
+      (3_1): Linear(in_features=300, out_features=47, bias=True)
+      (4_0): Linear(in_features=300, out_features=50, bias=True)
+      (4_1): Linear(in_features=300, out_features=50, bias=True)
+    )
+    (hyperbolic_fc_dict): ModuleDict(
+      (0): Linear(in_features=50, out_features=300, bias=True)
+      (1): Linear(in_features=50, out_features=300, bias=True)
+      (2): Linear(in_features=50, out_features=300, bias=True)
+      (3): Linear(in_features=50, out_features=300, bias=True)
+      (4): Linear(in_features=50, out_features=300, bias=True)
+    )
+    (loss_function): AsymmetricLoss()
+  )
+)
+train_instances 8066
+dev_instances 1573
+test_instances 1729
+Total epochs at each level: [2, 2, 3, 5, 50]
+Training model at depth 0:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 126.51s, loss: 32.5276
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3222, 0.4424, 0.4805, 0.4607, 0.7701
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4966, 0.6229, 0.7100, 0.6636, 0.8519
+rec_at_5: 0.7267
+prec_at_5: 0.5686
+rec_at_8: 0.8893
+prec_at_8: 0.4462
+rec_at_15: 1.0000
+prec_at_15: 0.2922
+
+evaluation finish in 97.19s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 145.48s, loss: 27.8550
+last epoch: testing on dev and test sets
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4075, 0.5311, 0.6182, 0.5714, 0.8215
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5332, 0.6388, 0.7633, 0.6955, 0.8800
+rec_at_5: 0.7735
+prec_at_5: 0.5995
+rec_at_8: 0.9170
+prec_at_8: 0.4584
+rec_at_15: 1.0000
+prec_at_15: 0.2922
+
+evaluation finish in 106.27s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4235, 0.5894, 0.6329, 0.6103, 0.8278
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5423, 0.6447, 0.7734, 0.7033, 0.8842
+rec_at_5: 0.7730
+prec_at_5: 0.6071
+rec_at_8: 0.9190
+prec_at_8: 0.4672
+rec_at_15: 1.0000
+prec_at_15: 0.2974
+
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Training model at depth 1:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.87s, loss: 51.8514
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3054, 0.4938, 0.4508, 0.4713, 0.8261
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4047, 0.5775, 0.5748, 0.5762, 0.8695
+rec_at_5: 0.5758
+prec_at_5: 0.5457
+rec_at_8: 0.7287
+prec_at_8: 0.4455
+rec_at_15: 0.9113
+prec_at_15: 0.3096
+
+evaluation finish in 114.05s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.25s, loss: 45.6201
+last epoch: testing on dev and test sets
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3801, 0.5229, 0.5829, 0.5513, 0.8541
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4574, 0.5915, 0.6686, 0.6277, 0.8929
+rec_at_5: 0.6219
+prec_at_5: 0.5882
+rec_at_8: 0.7776
+prec_at_8: 0.4768
+rec_at_15: 0.9304
+prec_at_15: 0.3163
+
+evaluation finish in 111.98s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3931, 0.5191, 0.5962, 0.5550, 0.8556
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4711, 0.6052, 0.6801, 0.6404, 0.8942
+rec_at_5: 0.6284
+prec_at_5: 0.5986
+rec_at_8: 0.7744
+prec_at_8: 0.4835
+rec_at_15: 0.9286
+prec_at_15: 0.3232
+
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Training model at depth 2:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.31s, loss: 54.9282
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3362, 0.4398, 0.5118, 0.4731, 0.8411
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4182, 0.5711, 0.6098, 0.5898, 0.8822
+rec_at_5: 0.5731
+prec_at_5: 0.5635
+rec_at_8: 0.7095
+prec_at_8: 0.4543
+rec_at_15: 0.8611
+prec_at_15: 0.3077
+
+evaluation finish in 115.17s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.22s, loss: 49.8022
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3766, 0.5035, 0.5795, 0.5388, 0.8612
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4498, 0.5718, 0.6783, 0.6205, 0.8980
+rec_at_5: 0.6070
+prec_at_5: 0.5983
+rec_at_8: 0.7385
+prec_at_8: 0.4773
+rec_at_15: 0.8807
+prec_at_15: 0.3163
+
+evaluation finish in 111.96s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 2
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 154.85s, loss: 46.6264
+last epoch: testing on dev and test sets
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3998, 0.5560, 0.5467, 0.5513, 0.8748
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4783, 0.6489, 0.6454, 0.6471, 0.9106
+rec_at_5: 0.6282
+prec_at_5: 0.6141
+rec_at_8: 0.7655
+prec_at_8: 0.4932
+rec_at_15: 0.9035
+prec_at_15: 0.3245
+
+evaluation finish in 112.95s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4053, 0.5774, 0.5538, 0.5654, 0.8741
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4796, 0.6502, 0.6463, 0.6482, 0.9093
+rec_at_5: 0.6171
+prec_at_5: 0.6176
+rec_at_8: 0.7527
+prec_at_8: 0.4957
+rec_at_15: 0.9010
+prec_at_15: 0.3325
+
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Training model at depth 3:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.20s, loss: 56.0740
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.3735, 0.4979, 0.5566, 0.5256, 0.8686
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4375, 0.5752, 0.6464, 0.6087, 0.9047
+rec_at_5: 0.5842
+prec_at_5: 0.5947
+rec_at_8: 0.7147
+prec_at_8: 0.4803
+rec_at_15: 0.8661
+prec_at_15: 0.3236
+
+evaluation finish in 116.29s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.03s, loss: 51.6420
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4062, 0.5522, 0.5798, 0.5657, 0.8801
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4668, 0.6082, 0.6676, 0.6365, 0.9143
+rec_at_5: 0.6024
+prec_at_5: 0.6145
+rec_at_8: 0.7360
+prec_at_8: 0.4944
+rec_at_15: 0.8803
+prec_at_15: 0.3297
+
+evaluation finish in 113.13s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 2
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.70s, loss: 49.3361
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4251, 0.5457, 0.6125, 0.5772, 0.8883
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4756, 0.6071, 0.6870, 0.6446, 0.9200
+rec_at_5: 0.6106
+prec_at_5: 0.6205
+rec_at_8: 0.7511
+prec_at_8: 0.5045
+rec_at_15: 0.8883
+prec_at_15: 0.3337
+
+evaluation finish in 113.76s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 3
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 157.24s, loss: 47.2426
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4422, 0.5796, 0.6252, 0.6016, 0.8940
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4891, 0.6213, 0.6968, 0.6569, 0.9239
+rec_at_5: 0.6205
+prec_at_5: 0.6300
+rec_at_8: 0.7572
+prec_at_8: 0.5095
+rec_at_15: 0.8951
+prec_at_15: 0.3364
+
+evaluation finish in 113.48s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 4
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.35s, loss: 45.5158
+last epoch: testing on dev and test sets
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4557, 0.5824, 0.6510, 0.6148, 0.8993
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4973, 0.6193, 0.7162, 0.6642, 0.9278
+rec_at_5: 0.6263
+prec_at_5: 0.6334
+rec_at_8: 0.7624
+prec_at_8: 0.5133
+rec_at_15: 0.9022
+prec_at_15: 0.3398
+
+evaluation finish in 112.79s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4539, 0.5798, 0.6480, 0.6120, 0.8979
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4928, 0.6188, 0.7077, 0.6602, 0.9265
+rec_at_5: 0.6199
+prec_at_5: 0.6370
+rec_at_8: 0.7622
+prec_at_8: 0.5206
+rec_at_15: 0.9002
+prec_at_15: 0.3474
+
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Training model at depth 4:
+EPOCH 0
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.88s, loss: 52.5459
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4340, 0.5454, 0.6340, 0.5863, 0.8967
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4759, 0.6058, 0.6895, 0.6449, 0.9233
+rec_at_5: 0.6105
+prec_at_5: 0.6175
+rec_at_8: 0.7459
+prec_at_8: 0.5009
+rec_at_15: 0.8840
+prec_at_15: 0.3341
+
+evaluation finish in 116.41s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 1
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.56s, loss: 49.0171
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4483, 0.5534, 0.6536, 0.5994, 0.9015
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4892, 0.6099, 0.7118, 0.6570, 0.9276
+rec_at_5: 0.6207
+prec_at_5: 0.6257
+rec_at_8: 0.7536
+prec_at_8: 0.5056
+rec_at_15: 0.8899
+prec_at_15: 0.3367
+
+evaluation finish in 113.88s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 2
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.28s, loss: 47.2774
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4600, 0.5712, 0.6706, 0.6170, 0.9072
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.4967, 0.6146, 0.7213, 0.6637, 0.9313
+rec_at_5: 0.6296
+prec_at_5: 0.6351
+rec_at_8: 0.7628
+prec_at_8: 0.5133
+rec_at_15: 0.8975
+prec_at_15: 0.3402
+
+evaluation finish in 113.21s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 3
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.83s, loss: 45.5474
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4679, 0.5662, 0.7031, 0.6273, 0.9094
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5017, 0.6053, 0.7457, 0.6682, 0.9319
+rec_at_5: 0.6301
+prec_at_5: 0.6351
+rec_at_8: 0.7618
+prec_at_8: 0.5139
+rec_at_15: 0.8961
+prec_at_15: 0.3400
+
+evaluation finish in 113.66s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 4
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 157.04s, loss: 44.1265
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4760, 0.5799, 0.6932, 0.6315, 0.9119
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5088, 0.6169, 0.7437, 0.6744, 0.9347
+rec_at_5: 0.6373
+prec_at_5: 0.6412
+rec_at_8: 0.7734
+prec_at_8: 0.5195
+rec_at_15: 0.9025
+prec_at_15: 0.3423
+
+evaluation finish in 113.42s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 5
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.47s, loss: 42.7786
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4816, 0.5848, 0.7009, 0.6376, 0.9122
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5115, 0.6195, 0.7458, 0.6768, 0.9347
+rec_at_5: 0.6367
+prec_at_5: 0.6407
+rec_at_8: 0.7735
+prec_at_8: 0.5197
+rec_at_15: 0.9017
+prec_at_15: 0.3421
+
+evaluation finish in 113.50s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 6
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.82s, loss: 41.5859
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4866, 0.5892, 0.7004, 0.6400, 0.9131
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5167, 0.6264, 0.7467, 0.6813, 0.9361
+rec_at_5: 0.6405
+prec_at_5: 0.6459
+rec_at_8: 0.7752
+prec_at_8: 0.5233
+rec_at_15: 0.9049
+prec_at_15: 0.3433
+
+evaluation finish in 113.37s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 7
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 155.81s, loss: 40.4983
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4910, 0.6103, 0.6825, 0.6444, 0.9130
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5228, 0.6453, 0.7335, 0.6866, 0.9350
+rec_at_5: 0.6408
+prec_at_5: 0.6432
+rec_at_8: 0.7763
+prec_at_8: 0.5221
+rec_at_15: 0.9048
+prec_at_15: 0.3433
+
+evaluation finish in 113.05s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 8
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.75s, loss: 39.4905
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4948, 0.6008, 0.7027, 0.6478, 0.9142
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5240, 0.6366, 0.7477, 0.6877, 0.9362
+rec_at_5: 0.6419
+prec_at_5: 0.6451
+rec_at_8: 0.7760
+prec_at_8: 0.5221
+rec_at_15: 0.9039
+prec_at_15: 0.3434
+
+evaluation finish in 113.44s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 9
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.48s, loss: 38.3820
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4934, 0.6105, 0.6911, 0.6483, 0.9140
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5270, 0.6490, 0.7370, 0.6902, 0.9354
+rec_at_5: 0.6409
+prec_at_5: 0.6454
+rec_at_8: 0.7771
+prec_at_8: 0.5235
+rec_at_15: 0.9069
+prec_at_15: 0.3441
+
+evaluation finish in 114.47s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 10
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.02s, loss: 37.5085
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4876, 0.5879, 0.7088, 0.6427, 0.9143
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5165, 0.6216, 0.7533, 0.6811, 0.9356
+rec_at_5: 0.6396
+prec_at_5: 0.6428
+rec_at_8: 0.7712
+prec_at_8: 0.5201
+rec_at_15: 0.9008
+prec_at_15: 0.3427
+
+evaluation finish in 113.10s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 11
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.37s, loss: 36.5886
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4937, 0.6179, 0.6795, 0.6473, 0.9140
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5265, 0.6530, 0.7311, 0.6898, 0.9353
+rec_at_5: 0.6410
+prec_at_5: 0.6448
+rec_at_8: 0.7743
+prec_at_8: 0.5218
+rec_at_15: 0.9031
+prec_at_15: 0.3433
+
+evaluation finish in 113.99s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 12
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 156.41s, loss: 35.6481
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4960, 0.6146, 0.6930, 0.6514, 0.9143
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5295, 0.6515, 0.7387, 0.6923, 0.9356
+rec_at_5: 0.6411
+prec_at_5: 0.6441
+rec_at_8: 0.7774
+prec_at_8: 0.5243
+rec_at_15: 0.9032
+prec_at_15: 0.3427
+
+evaluation finish in 113.87s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 13
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 157.00s, loss: 34.7642
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4981, 0.6122, 0.7010, 0.6536, 0.9139
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5288, 0.6456, 0.7450, 0.6918, 0.9350
+rec_at_5: 0.6398
+prec_at_5: 0.6448
+rec_at_8: 0.7765
+prec_at_8: 0.5235
+rec_at_15: 0.9012
+prec_at_15: 0.3424
+
+evaluation finish in 114.55s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 14
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.21s, loss: 33.9514
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4932, 0.6035, 0.6980, 0.6473, 0.9144
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5249, 0.6409, 0.7436, 0.6885, 0.9360
+rec_at_5: 0.6403
+prec_at_5: 0.6448
+rec_at_8: 0.7769
+prec_at_8: 0.5231
+rec_at_15: 0.9035
+prec_at_15: 0.3437
+
+evaluation finish in 114.73s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 15
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 158.13s, loss: 33.0623
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4952, 0.5971, 0.7143, 0.6505, 0.9142
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5205, 0.6263, 0.7550, 0.6847, 0.9353
+rec_at_5: 0.6367
+prec_at_5: 0.6432
+rec_at_8: 0.7752
+prec_at_8: 0.5224
+rec_at_15: 0.9033
+prec_at_15: 0.3434
+
+evaluation finish in 115.07s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 16
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 157.23s, loss: 32.2155
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4920, 0.5991, 0.7052, 0.6479, 0.9131
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5216, 0.6336, 0.7468, 0.6856, 0.9338
+rec_at_5: 0.6367
+prec_at_5: 0.6408
+rec_at_8: 0.7729
+prec_at_8: 0.5207
+rec_at_15: 0.8979
+prec_at_15: 0.3418
+
+evaluation finish in 119.47s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 17
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 167.43s, loss: 31.4763
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4948, 0.6080, 0.7002, 0.6508, 0.9136
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5253, 0.6406, 0.7449, 0.6888, 0.9347
+rec_at_5: 0.6362
+prec_at_5: 0.6414
+rec_at_8: 0.7762
+prec_at_8: 0.5225
+rec_at_15: 0.9014
+prec_at_15: 0.3426
+
+evaluation finish in 116.70s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 18
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 164.10s, loss: 30.6366
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.5005, 0.6154, 0.6941, 0.6524, 0.9132
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5243, 0.6436, 0.7389, 0.6880, 0.9341
+rec_at_5: 0.6411
+prec_at_5: 0.6456
+rec_at_8: 0.7754
+prec_at_8: 0.5219
+rec_at_15: 0.9031
+prec_at_15: 0.3427
+
+evaluation finish in 119.50s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 19
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 163.35s, loss: 29.8803
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4978, 0.6102, 0.7021, 0.6529, 0.9123
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5237, 0.6395, 0.7431, 0.6874, 0.9325
+rec_at_5: 0.6409
+prec_at_5: 0.6440
+rec_at_8: 0.7751
+prec_at_8: 0.5219
+rec_at_15: 0.8977
+prec_at_15: 0.3412
+
+evaluation finish in 120.15s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 20
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 163.60s, loss: 29.1446
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.5007, 0.6119, 0.7034, 0.6545, 0.9117
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5259, 0.6417, 0.7446, 0.6893, 0.9337
+rec_at_5: 0.6407
+prec_at_5: 0.6434
+rec_at_8: 0.7766
+prec_at_8: 0.5231
+rec_at_15: 0.9013
+prec_at_15: 0.3427
+
+evaluation finish in 119.01s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 21
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 162.99s, loss: 28.4448
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.5020, 0.6125, 0.7004, 0.6535, 0.9115
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5258, 0.6443, 0.7408, 0.6892, 0.9324
+rec_at_5: 0.6363
+prec_at_5: 0.6404
+rec_at_8: 0.7768
+prec_at_8: 0.5235
+rec_at_15: 0.9010
+prec_at_15: 0.3419
+
+evaluation finish in 118.81s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+EPOCH 22
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+epoch finish in 163.49s, loss: 27.7939
+file for evaluation: ./data/mimic3/dev_50.csv
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.5001, 0.6166, 0.6966, 0.6542, 0.9113
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5282, 0.6501, 0.7380, 0.6913, 0.9323
+rec_at_5: 0.6381
+prec_at_5: 0.6427
+rec_at_8: 0.7757
+prec_at_8: 0.5234
+rec_at_15: 0.8991
+prec_at_15: 0.3419
+
+evaluation finish in 119.53s
+saved metrics, params, model to directory ./models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+prec_at_8 hasn't improved in 10 epochs, early stopping...
+loading pretrained embeddings from ./data/mimic3/processed_full_100.embed
+adding unk embedding
+file for evaluation: ./data/mimic3/dev_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4960, 0.6146, 0.6930, 0.6514, 0.9143
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5295, 0.6515, 0.7387, 0.6923, 0.9356
+rec_at_5: 0.6411
+prec_at_5: 0.6441
+rec_at_8: 0.7774
+prec_at_8: 0.5243
+rec_at_15: 0.9032
+prec_at_15: 0.3427
+
+evaluation finish in 113.71s
+file for evaluation: ./data/mimic3/test_50.csv
+/usr/lib/python3.10/multiprocessing/popen_fork.py:66: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = os.fork()
+
+[MACRO] accuracy, precision, recall, f-measure, AUC
+0.4931, 0.6128, 0.6926, 0.6503, 0.9135
+[MICRO] accuracy, precision, recall, f-measure, AUC
+0.5208, 0.6442, 0.7311, 0.6849, 0.9359
+rec_at_5: 0.6300
+prec_at_5: 0.6494
+rec_at_8: 0.7678
+prec_at_8: 0.5296
+rec_at_15: 0.9033
+prec_at_15: 0.3526
+
+saved metrics, params, model to directory /content/HiCu-Reproduce-main/models/MultiResCNN_HierarchicalHyperbolic_A_ASL_50_Apr_12_03_22_53
+
+Completed all 1 runs
